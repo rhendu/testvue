@@ -74,7 +74,8 @@
                         dark
                         v-model="username"
                         placeholder="Please enter username."
-                        :error="errors[0]"
+                        :error="!!errors.length"
+                        :error-message="errors[0]"
                       />
                     </ValidationProvider>
                   </div>
@@ -91,7 +92,8 @@
                         v-model="password"
                         type="password"
                         placeholder="Please enter password."
-                        :error="errors[0]"
+                        :error="!!errors.length"
+                        :error-message="errors[0]"
                       />
                     </ValidationProvider>
                   </div>
@@ -108,7 +110,8 @@
                         v-model="confirmPassword"
                         type="password"
                         placeholder="Please confirm your password."
-                        :error="errors[0]"
+                        :error="!!errors.length"
+                        :error-message="errors[0]"
                       />
                     </ValidationProvider>
                   </div>
@@ -125,7 +128,8 @@
                         v-model="mobile"
                         type="tel"
                         placeholder="Please enter mobile number."
-                        :error="errors[0]"
+                        :error="!!errors.length"
+                        :error-message="errors[0]"
                         @input="validateMobile"
                       />
                     </ValidationProvider>
@@ -143,7 +147,8 @@
                         dark
                         v-model="email"
                         placeholder="Please enter e-mail address."
-                        :error="errors[0]"
+                        :error="!!errors.length"
+                        :error-message="errors[0]"
                       />
                     </ValidationProvider>
                   </div>
@@ -159,7 +164,8 @@
                         dark
                         v-model="identity"
                         placeholder="Please enter correct ID number."
-                        :error="errors[0]"
+                        :error="!!errors.length"
+                        :error-message="errors[0]"
                       />
                     </ValidationProvider>
                   </div>
@@ -175,7 +181,8 @@
                         dark
                         v-model="referral"
                         placeholder="Please enter referral."
-                        :error="errors[0]"
+                        :error="!!errors.length"
+                        :error-message="errors[0]"
                       />
                     </ValidationProvider>
                   </div>
@@ -203,7 +210,8 @@
                               background: #262626;
                             "
                             v-model="verificationCode"
-                            :error="errors[0]"
+                            :error="!!errors.length"
+                            :error-message="errors[0]"
                           />
                         </ValidationProvider>
                       </div>
@@ -239,7 +247,7 @@
                     </ValidationProvider>
                   </div>
                   <div class="col-12 flex justify-center items-center">
-                    <q-btn type="submit" label="Register" />
+                    <q-btn type="submit" label="Register" :disable="invalid" />
                   </div>
                 </div>
               </q-form>
@@ -277,26 +285,6 @@ export default {
       }
     },
     handleSubmit() {
-      // Perform form validation here
-      if (
-        !this.username ||
-        !this.password ||
-        !this.confirmPassword ||
-        !this.mobile ||
-        !this.email ||
-        !this.identity ||
-        !this.verificationCode ||
-        !this.val
-      ) {
-        alert("Please fill all the required fields and agree to the terms.");
-        return;
-      }
-
-      if (this.password !== this.confirmPassword) {
-        alert("Passwords do not match.");
-        return;
-      }
-
       // If validation passes, proceed with the registration
       console.log("Form submitted with data:", {
         username: this.username,
@@ -485,7 +473,7 @@ body {
 .q-btn {
   display: flex;
   justify-content: center;
-  background: rgba(187, 127, 15, 1);
+  background: rgb(240, 156, 0);
   border-radius: 50px;
 }
 .q-input {
